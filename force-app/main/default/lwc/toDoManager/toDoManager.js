@@ -1,5 +1,7 @@
 import { LightningElement, track } from 'lwc';
 
+import addTodo from "@salesforce/apex/ToDoController.addTodo";
+
 
 export default class ToDoManager extends LightningElement {
 
@@ -61,13 +63,18 @@ export default class ToDoManager extends LightningElement {
         const inputBox = this.template.querySelector("lightning-input");
 
         const todo = {
-            toDoId : this.todos.length,
+            // toDoId : this.todos.length,
             todoName : inputBox.value,
-            done: false,
-            todoDate : new Date()
-        }
+            done: false
+            // todoDate : new Date()
+        };
+        addTodo({payload : JSON.stringify(todo)}).then(response => {
+            console.log('item inserted = 200');   
+        }).catch(error => {
+            console.log('error',' = error in insering todoItem' );
+        });
 
-        this.todos.push(todo);
+        // this.todos.push(todo);
         inputBox.value = "";
     }
 
@@ -105,5 +112,17 @@ export default class ToDoManager extends LightningElement {
     get completedTasks(){
         return this.todos && this.todos.length ? this.todos.filter(todo => todo.done) : [];
     }
+    
 
+  updateTodoHandler(event) {
+    if (event) {
+      this.fetchTodos();
+    }
+  }
+
+  deleteTodoHandler(event) {
+    if (event) {
+      this.fetchTodos();
+    }
+  }
 }

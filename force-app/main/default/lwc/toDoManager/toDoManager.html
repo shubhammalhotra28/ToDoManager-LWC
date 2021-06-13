@@ -43,7 +43,7 @@
            UPCOMING TASKS
        </div>
        <template for:each={upComingTasks} for:item="todo">
-        <c-to-do-item key={todo.todoId} todo-id={todo.todoId} todo-name={todo.todoName}></c-to-do-item>
+        <c-to-do-item key={todo.todoId} todo-id={todo.todoId} todo-name={todo.todoName} onupdate={updateTodoHandler} ondelete={deleteTodoHandler}></c-to-do-item>
            
             <!-- <span class="slds-text-heading_label">{todo.todoName}</span>
             <lightning-button-icon icon-name="utility:check" class="slds-p-horizontal_medium" onclick={updateHandler} title="Update Todo"></lightning-button-icon>
@@ -56,7 +56,7 @@
         Completed TASKS
     </div>
     <template for:each={completedTasks} for:item="todo">
-        <c-to-do-item key={todo.todoId} todo-id={todo.todoId} todo-name={todo.todoName} done></c-to-do-item>
+        <c-to-do-item key={todo.todoId} todo-id={todo.todoId} todo-name={todo.todoName} onupdate={updateTodoHandler} ondelete={deleteTodoHandler} done ></c-to-do-item>
          
      </template>
 
